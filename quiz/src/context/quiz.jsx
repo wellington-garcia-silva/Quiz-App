@@ -7,6 +7,8 @@ const initialState = {
     gameStage: STAGES[0],
     questions,
     currentQuestion: 0,
+    score: 0,
+    anwerSelected: false,
 };
 
 const quizReducer = (state, action) => {
@@ -27,6 +29,22 @@ const quizReducer = (state, action) => {
                 ...state,
                 questions: reorderedQuestions,
             };
+
+            case "CHANGE_QUESTIONS":
+                const nextQuestion = state.currentQuestion + 1;
+                let endgame = false;
+
+                if (!questions[nextQuestion]) {
+                    endgame = true;
+                }
+
+                return{
+                    ...state,
+                    currentQuestion: nextQuestion,
+                    gameStage: endgame ? STAGES[2] : state.gameStage,
+                }
+            case "NEW_GAME":
+                return initialState;
 
         default:
             return state;
