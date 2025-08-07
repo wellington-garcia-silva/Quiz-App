@@ -1,5 +1,5 @@
-import { useContext } from "react"
-import { QuizContext } from "../context/quiz"
+import { useContext } from "react";
+import { QuizContext } from "../context/quiz";
 
 import "./Question.css";
 
@@ -10,11 +10,11 @@ const Question = () => {
   const currentQuestion = quizState.questions[quizState.currentQuestion];
 
   const onSelectOption = (option) => {
-     dispatch({
+    dispatch({
       type: "CHANGE_ANSWER",
-      payload: {answer: currentQuestion.option, option},
-     });
-  }
+      payload: { answer: currentQuestion.answer, option },
+    });
+  };
  
 
   return (
@@ -28,7 +28,7 @@ const Question = () => {
           <Option option={option} 
           key={option} 
           answer={currentQuestion.answer}
-          selectOption={() => onSelectOption()}
+          selectOption={() => onSelectOption(option)}
           />
         ))}
       </div>
